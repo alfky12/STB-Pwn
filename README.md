@@ -1,4 +1,92 @@
-# PI Pwn
+## Install
+
+Jalankan perintah ini satu per satu.<br>
+Update repo dan instal git<br>
+```sh
+sudo apt update && sudo apt install git -y
+```
+Pilih salah satu git yang ingin di clone:<br>
+Bila ingin memakai Stooged PI-Pwn
+```sh
+git clone https://github.com/stooged/PI-Pwn
+cd PI-Pwn
+```
+Bila ingin memakai STB-Pwn
+```sh
+git clone https://github.com/alfky12/STB-Pwn
+cd STB-Pwn
+```
+Menempatkan PPPwn pada direktori yang sesuai
+```sh
+mkdir -p /boot/firmware
+cp -r PPPwn /boot/firmware
+```
+(Opsional - boleh dilewati) Menyembunyikan pesan kernel
+```sh
+sudo sed -i '/exit 0/i sudo dmesg -n 1' /etc/rc.local
+```
+Berikan akses dan memulai instalasi
+```sh
+cd /boot/firmware/PPPwn
+sudo chmod 777 *
+sudo bash install.sh
+```
+
+## Update
+
+Buat file baru untuk update menggunakan nano
+```sh
+nano updatepipwn.sh
+```
+Copas semua perintah berikut (pilih salah satu):<br>
+Bila memakai Stooged PI-Pwn
+```sh
+#!/bin/bash
+
+sudo systemctl stop pipwn
+find /boot/firmware/PPPwn ! -name 'config.sh' ! -name 'PPPwn' -exec rm -rf {} +
+cd PI-Pwn
+git pull
+cp -r PPPwn /boot/firmware
+cd /boot/firmware/PPPwn
+sudo chmod 777 *
+sudo bash install.sh
+
+```
+Bila memakai STB-Pwn
+```sh
+#!/bin/bash
+
+sudo systemctl stop pipwn
+find /boot/firmware/PPPwn ! -name 'config.sh' ! -name 'PPPwn' -exec rm -rf {} +
+cd STB-Pwn
+git pull
+cp -r PPPwn /boot/firmware
+cd /boot/firmware/PPPwn
+sudo chmod 777 *
+sudo bash install.sh
+
+```
+Simpan dan keluar dari nano: ctrl+X lalu Y lalu enter.<br>
+Buat skrip tersebut bisa dieksekusi.
+```sh
+chmod +x updatepipwn.sh
+```
+Skrip update selesai dibuat. Untuk melakukan update skrip PI-Pwn/STB-Pwn, cukup ketikkan perintah ini lalu enter.
+```sh
+./updatepipwn.sh
+```
+
+## Alat tempur:<br>
+
+- STB HG680P terinstall armbian bookworm dari <a href=https://github.com/ophub/amlogic-s9xxx-armbian>ophub</a><br>
+- USB Step-up 5v ke 12v untuk power STB, supaya mati nyala ngikut PS4-nya<br>
+- Kabel LAN<br>
+- USB to LAN adapter sebagai sumber internet untuk PS4 dan akses SSH dan FTP (opsional saja, bisa pake wifi dari HG680P)<br>
+
+# Sumber asli
+
+## PI Pwn
 
 This is a script to setup <a href=https://github.com/TheOfficialFloW/PPPwn>PPPwn</a> and <a href=https://github.com/xfangfang/PPPwn_cpp>PPPwn_cpp</a> on the raspberry pi and run <a href=https://github.com/GoldHEN/GoldHEN>GoldHen</a> on the PS4 fw 11.0, 10.01, 10.00, 9.00<br>
 It also supports internet access after pwn and access to ftp, klog and binloader servers launched by goldhen.<br>
