@@ -14,99 +14,42 @@ sudo apt update && sudo apt install git -y
 ```
 Unduh git STB-Pwn
 ```sh
-git clone https://github.com/alfky12/STB-Pwn
-cd STB-Pwn
+git clone https://github.com/alfky12/STB-Pwn && cd STB-Pwn
 ```
 Copy folder PPPwn pada direktori kerja
 ```sh
-mkdir -p /boot/firmware
-cp -r PPPwn /boot/firmware
+mkdir -p /boot/firmware && cp -r PPPwn /boot/firmware
 ```
 Memulai instalasi
 ```sh
-cd /boot/firmware/PPPwn
-sudo chmod 777 *
-sudo bash install.sh
+cd /boot/firmware/PPPwn && sudo chmod 777 * && sudo bash install.sh
 ```
 
 ## Cara Update
 
-Buat file baru menggunakan nano
+Copy paste semua perintah berikut lalu tekan enter.<br>
 ```sh
-nano updatepipwn.sh
-```
-Copy paste semua perintah berikut ke dalam jendela nano:<br>
-```sh
-#!/bin/bash
-
 sudo systemctl stop pipwn
 find /boot/firmware/PPPwn ! -name 'config.sh' ! -name 'PPPwn' -exec rm -rf {} +
-cd STB-Pwn
-git pull
+cd STB-Pwn && git pull
 cp -r PPPwn /boot/firmware
-cd /boot/firmware/PPPwn
-sudo chmod 777 *
-sudo bash install.sh
-
-```
-Simpan dan keluar dari nano: CTRL+X lalu Y lalu enter.<br>
-Buat skrip tersebut bisa dijalankan
-```sh
-chmod +x updatepipwn.sh
-```
-Skrip update selesai dibuat.<br>
-Untuk melakukan update skrip STB-Pwn, cukup ketikkan perintah ini lalu enter.
-```sh
-./updatepipwn.sh
+cd /boot/firmware/PPPwn && sudo chmod 777 * && sudo bash install.sh
 ```
 
-## Cara Uninstall
+## Cara Uninstall (untuk PI-Pwn dan STB-Pwn)
 
-Buat file baru menggunakan nano
+Copy paste semua perintah berikut lalu tekan enter.<br>
 ```sh
-nano hapuspipwn.sh
+sudo systemctl stop pipwn && sudo systemctl disable pipwn
+sudo rm -f /etc/systemd/system/pipwn.service && sudo rm -f /usr/lib/systemd/system/pipwn.service
+sudo rm -rf /boot/firmware/PPPwn
+sudo rm -rf PI-Pwn STB-Pwn
+sudo sed -i 's^sudo bash /boot/firmware/PPPwn/devboot.sh \&^^g' /etc/rc.local
+sudo systemctl daemon-reload
 ```
-Copy paste semua perintah berikut ke dalam jendela nano:<br>
+Sebaiknya lakukan reboot setelah uninstall berhasil.
 ```sh
-#!/bin/bash
-
-echo "Hapus instalan PI-Pwn/STB-Pwn? (Y|N)"
-read -r delete_choice
-if [ "$delete_choice" == "Y" ] || [ "$delete_choice" == "y" ]; then
-    sudo systemctl stop pipwn
-    sudo rm -rf /boot/firmware/PPPwn
-    sudo rm -rf PI-Pwn STB-Pwn
-    sudo sed -i 's^sudo bash /boot/firmware/PPPwn/devboot.sh \&^^g' /etc/rc.local
-    echo "Hapus instalan berhasil. Muat ulang sekarang? (Y|N)"
-    read -r reboot_choice
-    if [ "$reboot_choice" == "Y" ] || [ "$reboot_choice" == "y" ]; then
-        echo "Memulai muat ulang."
-        sudo reboot
-    elif [ "$reboot_choice" == "N" ] || [ "$reboot_choice" == "n" ]; then
-        echo "Muat ulang dibatalkan."
-        exit 0
-    else
-        echo "Input tidak valid. Keluar dari skrip."
-        exit 1
-    fi
-elif [ "$delete_choice" == "N" ] || [ "$delete_choice" == "n" ]; then
-    echo "Batal hapus instalan."
-    exit 0
-else
-    echo "Input tidak valid. Keluar dari skrip."
-    exit 1
-fi
-
-```
-Simpan dan keluar dari nano: CTRL+X lalu Y lalu enter.<br>
-Buat skrip tersebut bisa dijalankan
-```sh
-chmod +x hapuspipwn.sh
-```
-Skrip uninstall selesai dibuat.<br>
-Untuk melakukan uninstall skrip PI-Pwn/STB-Pwn, cukup ketikkan perintah ini lalu enter.
-```sh
-./hapuspipwn.sh
+sudo reboot
 ```
 
 # Sumber asli
