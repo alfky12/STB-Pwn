@@ -3,53 +3,35 @@
 - STB HG680P telah terinstall armbian bookworm dari <a href=https://github.com/ophub/amlogic-s9xxx-armbian>ophub</a><br>
 - USB Step-up 5v ke 12v untuk power STB (agar hidup mati STB mengikuti PS4)<br>
 - Kabel LAN<br>
-- USB to LAN adapter sebagai sumber internet PS4 dan akses SSH juga FTP (opsional saja, dapat memakai WiFi)<br>
+- USB to LAN adapter sebagai sumber internet untuk STB (opsional saja, dapat memakai WiFi)<br>
 
 ## Cara Install
 
-Jalankan perintah ini satu per satu.<br>
-Update repo dan instal git
+Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
-sudo apt update && sudo apt install git -y
-```
-Unduh git STB-Pwn
-```sh
-git clone https://github.com/alfky12/STB-Pwn && cd STB-Pwn
-```
-Copy folder PPPwn pada direktori kerja
-```sh
-mkdir -p /boot/firmware && cp -r PPPwn /boot/firmware
-```
-Memulai instalasi
-```sh
-cd /boot/firmware/PPPwn && sudo chmod 777 * && sudo bash install.sh
+wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/instalstbpwn.sh -O instalstbpwn.sh && sudo bash instalstbpwn.sh
 ```
 
 ## Cara Update
 
-Copy paste semua perintah berikut lalu tekan enter.<br>
+Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
-sudo systemctl stop pipwn
-find /boot/firmware/PPPwn ! -name 'config.sh' ! -name 'PPPwn' -exec rm -rf {} +
-cd STB-Pwn && git pull
-cp -r PPPwn /boot/firmware
-cd /boot/firmware/PPPwn && sudo chmod 777 * && sudo bash install.sh
+wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/updatestbpwn.sh -O updatestbpwn.sh && sudo bash updatestbpwn.sh
 ```
 
 ## Cara Uninstall (untuk PI-Pwn dan STB-Pwn)
 
-Copy paste semua perintah berikut lalu tekan enter.<br>
+Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
-sudo systemctl stop pipwn && sudo systemctl disable pipwn
-sudo rm -f /etc/systemd/system/pipwn.service && sudo rm -f /usr/lib/systemd/system/pipwn.service
-sudo rm -rf /boot/firmware/PPPwn
-sudo rm -rf PI-Pwn STB-Pwn
-sudo sed -i 's^sudo bash /boot/firmware/PPPwn/devboot.sh \&^^g' /etc/rc.local
-sudo systemctl daemon-reload
+wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/hapusstbpwn.sh -O hapusstbpwn.sh && sudo bash hapusstbpwn.sh
 ```
-Sebaiknya lakukan reboot setelah uninstall berhasil.
+
+## Tweak untuk mempercepat HEN (untuk PI-Pwn dan STB-Pwn)
+
+Hasil tetap dipengaruhi banyak faktor. Silahkan dicoba saja.<br>
+Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
-sudo reboot
+wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/fastpipwn.sh -O fastpipwn.sh && sudo bash fastpipwn.sh
 ```
 
 # Sumber asli
