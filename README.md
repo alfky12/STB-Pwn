@@ -28,6 +28,9 @@ wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/hapusstbpwn.sh -O ha
 
 ## Tweak untuk mempercepat HEN (untuk PI-Pwn dan STB-Pwn)
 
+> [!WARNING]
+> *Tidak berfungsi untuk skrip PI-Pwn Stooged update per tanggal 11 Juni 2024.<br>Untuk skrip PI-Pwn Stooged versi sebelumnya masih berfungsi.*
+
 Hasil tetap dipengaruhi banyak faktor. Silahkan dicoba saja.<br>
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
