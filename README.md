@@ -1,32 +1,39 @@
-## Alat tempur:<br>
+# STB-Pwn
+> [!NOTE]
+Skrip ini adalah hasil fork dari <a href=https://github.com/stooged/PI-Pwn>PI-Pwn</a> milik Stooged dengan beberapa penyesuaian.<br>
+Sinkronisasi terakhir dilakukan pada tanggal <b><i>29 Mei 2024, commit bdb9b24</i></b>.<br>
+Beberapa berkas yang lebih baru digantikan oleh berkas lama karena proses HEN lebih cepat menggunakan berkas tersebut.<br>
+Skrip ini hanya akan mendukung firmware <b><i>9.00, 10.00, dan 11.00</i></b>.<br>
+
+## 🖥️ Alat tempur:<br>
 
 - STB HG680P telah terinstall armbian bookworm dari <a href=https://github.com/ophub/amlogic-s9xxx-armbian>ophub</a><br>
 - USB Step-up 5v ke 12v untuk power STB (agar hidup mati STB mengikuti PS4)<br>
 - Kabel LAN<br>
 - USB to LAN adapter sebagai sumber internet untuk STB (opsional saja, dapat memakai WiFi)<br>
 
-## Cara Install
+## 📢 Cara Install
 
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/instalstbpwn.sh -O instalstbpwn.sh && sudo bash instalstbpwn.sh
 ```
 
-## Cara Update
+## 📢 Cara Update
 
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/updatestbpwn.sh -O updatestbpwn.sh && sudo bash updatestbpwn.sh
 ```
 
-## Cara Uninstall (untuk PI-Pwn dan STB-Pwn)
+## 📢 Cara Uninstall (untuk PI-Pwn dan STB-Pwn)
 
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/hapusstbpwn.sh -O hapusstbpwn.sh && sudo bash hapusstbpwn.sh
 ```
 
-## Tweak untuk mempercepat HEN (untuk PI-Pwn dan STB-Pwn)
+## 💡 Tweak untuk mempercepat HEN (untuk PI-Pwn)
 
 > [!WARNING]
 > *Tidak berfungsi untuk skrip PI-Pwn Stooged update per tanggal 11 Juni 2024.<br>Untuk skrip PI-Pwn Stooged versi sebelumnya masih berfungsi.*
@@ -36,9 +43,10 @@ Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/fastpipwn.sh -O fastpipwn.sh && sudo bash fastpipwn.sh
 ```
+---
+<br>
 
-# Sumber asli
-
+# Sumber Asli
 ## PI Pwn
 
 This is a script to setup <a href=https://github.com/TheOfficialFloW/PPPwn>PPPwn</a> and <a href=https://github.com/xfangfang/PPPwn_cpp>PPPwn_cpp</a> on the raspberry pi and run <a href=https://github.com/GoldHEN/GoldHEN>GoldHen</a> on the PS4 fw 11.0, 10.01, 10.00, 9.00<br>
@@ -47,9 +55,7 @@ A dns blocker is also installed and used to prevent updates.<br>
 
 The <a href=https://www.raspberrypi.com/products/raspberry-pi-4-model-b/>Raspberry Pi 4</a>, <a href=https://www.raspberrypi.com/products/raspberry-pi-400/>Raspberry Pi 400</a> and <a href=https://www.raspberrypi.com/products/raspberry-pi-5/>Raspberry Pi 5</a> can pass through a usb drive inserted into the pi to the console if the pi is plugged into the console usb port<br>
 
-There is also a webserver to control the pi, change settings and send payloads by accessing http://pppwn.local from the console or your pc if you have internet access enabled.<br> 
-
-<br>
+There is also a webserver to control the pi, change settings and send payloads by accessing http://pppwn.local from the console or your pc if you have internet access enabled.<br>
 
 ## Tested PI Models
 
@@ -66,7 +72,6 @@ There is also a webserver to control the pi, change settings and send payloads b
 
 
 ## Install
-<br>
 
 You need to install <a href=https://www.raspberrypi.com/software/operating-systems/>Raspberry Pi OS Lite</a> or <a href="https://www.armbian.com/">Armbian Cli / Minimal</a> onto a sd card.<br>
 
