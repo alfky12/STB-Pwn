@@ -26,7 +26,7 @@ Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/updatestbpwn.sh -O updatestbpwn.sh && sudo bash updatestbpwn.sh
 ```
 
-## 📢 Cara Uninstall (untuk PI-Pwn dan STB-Pwn)
+## 📢 Cara Uninstall
 
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
@@ -39,6 +39,7 @@ wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/hapusstbpwn.sh -O ha
 > *Tidak berfungsi untuk skrip PI-Pwn Stooged update per tanggal 11 Juni 2024.<br>Untuk skrip PI-Pwn Stooged versi sebelumnya masih berfungsi.*
 
 Hasil tetap dipengaruhi banyak faktor. Silahkan dicoba saja.<br>
+Tidak diperlukan untuk skrip STB-Pwn karena sudah diterapkan.<br>
 Copy paste perintah berikut ke terminal/putty lalu tekan enter.
 ```sh
 wget https://raw.githubusercontent.com/alfky12/STB-Pwn/main/fastpipwn.sh -O fastpipwn.sh && sudo bash fastpipwn.sh
