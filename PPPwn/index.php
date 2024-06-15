@@ -79,15 +79,21 @@ if (isset($_POST['restart'])){
 }
 
 if (isset($_POST['reboot'])){
+	
+   print("<html><head><title>PI-Pwn</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><style>body{user-select: none;-webkit-user-select: none;background-color: #0E0E14;color: white;font-family: Arial;font-size:20px;}a {padding: 5px 5px;font-size:20px; padding:4px; color:6495ED;} a:hover,a:focus {color: #999999;text-decoration: none;cursor: pointer;}</style><body><br><br><br><center>The PI is rebooting...<br><br><a href=index.php>Reload Page</a></center></body></html>");
    exec('sudo reboot');
+   exit;
 }
  
 if (isset($_POST['shutdown'])){
+   print("<html><head><title>PI-Pwn</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><style>body{user-select: none;-webkit-user-select: none;background-color: #0E0E14;color: white;font-family: Arial;font-size:20px;}</style><body><br><br><br><center>The PI is shutting down!</center></body></html>");
    exec('sudo poweroff');
+   exit;
 }
 
 if (isset($_POST['payloads'])){
    header("Location: payloads.php");
+   exit;
 }
 
 if (isset($_POST['remount'])){
@@ -180,10 +186,6 @@ if ($pret == 0){
 }else{
    $portlist = "2121,3232,9090,8080,12800,1337";	
 }
-
-
-$cmd = 'sudo ip link | cut -d " " -f-2   | cut -d ":" -f2-2 ';
-exec($cmd ." 2>&1", $idata, $iret);
 
 
 print("<html> 
@@ -380,6 +382,20 @@ label[id=pwnlog]:focus {
     cursor: pointer;
 }
 
+label[id=pconfig] {
+    padding: 5px 5px;
+	font-size:12px; 
+	padding:4px; 
+	color:6495ED;
+}
+label[id=pconfig]:hover,
+label[id=pconfig]:focus {
+    color: #999999;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 </style>
 <script>
 var fid;
@@ -457,11 +473,12 @@ print("<button name=\"remount\">Remount USB</button> &nbsp; ");
 
 print("<button name=\"restart\">Restart PPPwn</button> &nbsp; <button name=\"reboot\">Reboot PI</button> &nbsp; <button name=\"shutdown\">Shutdown PI</button> &nbsp; <button name=\"update\">Update</button>
 </form>
-</center>");
+</center><br><table align=center><td><form method=\"post\">");
 
-print("<br><table align=center><td><form method=\"post\">");
 
 print("<select name=\"interface\">");
+$cmd = 'sudo ip link | cut -d " " -f-2 | cut -d ":" -f2-2 ';
+exec($cmd ." 2>&1", $idata, $iret);
 foreach ($idata as $x) {
 $x = trim($x);
 if ($x !== "" && $x !== "lo" && $x !== "ppp0" && !str_starts_with($x, "wlan"))
@@ -504,6 +521,7 @@ for($x =1; $x<=5;$x++)
 print("</select><label for=\"timeout\">&nbsp; Time to restart PPPwn if it hangs</label><br><br>");
 
 
+
 print("<select name=\"ledact\">");
 foreach ($ledacts as $la) {
 if ($ledact == $la)
@@ -516,6 +534,7 @@ if ($ledact == $la)
 print("</select><label for=\"ledact\">&nbsp; Led activity</label><br><br>");
 
 
+
 $cmd = 'sudo dpkg-query -W --showformat="\${Status}\\n" python3-scapy | grep "install ok installed"';
 exec($cmd ." 2>&1", $pypdata, $ret);
 if (implode($pypdata) == "install ok installed")
@@ -526,8 +545,14 @@ if ($upypwn == "true")
 $cval = "checked";
 }
 print("<br><input type=\"checkbox\" name=\"upypwn\" value=\"".$upypwn."\" ".$cval.">
-<label for=\"upypwn\">&nbsp;Use Python version</label>
-<br>");
+<label for=\"upypwn\">&nbsp;Use Python version</label>");
+if ($upypwn == "false")
+{
+print("&nbsp; <a href=\"pconfig.php\" style=\"text-decoration:none;\"><label id=\"pconfig\">PPPwn C++ Options</label></a>");
+}
+print("<br>");
+}else{
+print("<a href=\"pconfig.php\" style=\"text-decoration:none;\"><label id=\"pconfig\">PPPwn C++ Options</label></a><br>");
 }
 
 
